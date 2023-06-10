@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PlayerCatchBall : MonoBehaviour
+public class PlayerCatchBall : NetworkBehaviour
 {
     public bool IsCatched
     {
@@ -21,6 +22,7 @@ public class PlayerCatchBall : MonoBehaviour
     }
     private void Update()
     {
+        if(!isLocalPlayer) return;
         CatchBall();
     }
     private void OnTriggerEnter(Collider collider)

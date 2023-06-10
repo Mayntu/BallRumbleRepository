@@ -6,7 +6,6 @@ public class PlayerThrowBall : NetworkBehaviour
     [SerializeField] private float maxPower;
     [SerializeField] private float maxDistance;
     [SerializeField] private float throwAngle;
-    [SerializeField] private float powerIncreaseSpeed;
     [SerializeField] private GameObject player;
 
     private bool isThrowing = false;
