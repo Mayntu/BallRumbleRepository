@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 2702847416947461068}
   - component: {fileID: 734300341547900708}
   - component: {fileID: 3543722674945225708}
+  - component: {fileID: 1090653080028880948}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -232,7 +233,7 @@ Transform:
   - {fileID: 5568717299860439223}
   - {fileID: 4244598078620872311}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8618099285507868989
 Rigidbody:
@@ -391,5 +392,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6697440ebfaf2cb4185e6714f9505aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   ball: {fileID: 0}
   handsPosition: {fileID: 4244598078620872311}
+--- !u!114 &1090653080028880948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2918110095531199675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416e7ee3cc578a742955182a7f7cfcf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballSpeed: 5
+  recoveryTime: 2
