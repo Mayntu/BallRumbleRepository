@@ -11,21 +11,34 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float sprintSpeed;
     [SerializeField] private float walkSpeed;
+    [SerializeField] private float staminaMax;
+    [SerializeField] private float stamina;
+    [SerializeField] private float staminaCooldown;
 
-    private CharacterController characterController;
+    //[SerializeField] private Image staminaLevel;
+
+    private bool isSprinting;
+    private bool canHeal;
+    
     private float ySpeed;
     private float originalStepOffset;
-    private bool canMove = true;
+    private float timeSinceSprint;
+
+    private CharacterController characterController;
+    private Animator animator;
 
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
+        animator= GetComponent<Animator>();
+
         originalStepOffset = characterController.stepOffset;
     }
 
     private void Update()
     {
-        if(!isLocalPlayer) return;
+
+        if (!isLocalPlayer) return;
 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
@@ -33,8 +46,6 @@ public class PlayerMovement : NetworkBehaviour
         Vector3 movementDirection = new Vector3(-horizontalInput, 0, -verticalInput);
         float magnitude = Mathf.Clamp01(movementDirection.magnitude) * movementSpeed;
         movementDirection.Normalize();
-
-        Sprint();
 
         ySpeed += Physics.gravity.y * Time.deltaTime * 3;
 
@@ -64,17 +75,64 @@ public class PlayerMovement : NetworkBehaviour
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
+
+        Sprint();
+        Animation(movementDirection);
+        if (stamina <= 0)
+        {
+            movementSpeed = walkSpeed;
+        }
+        if(stamina > staminaMax)
+        {
+            stamina = staminaMax;
+        }
+        RefillStamina();
     }
 
     private void Sprint()
     {
-        if (Input.GetKey("left shift"))
+        if (Input.GetKey("left shift") && stamina > 0)
         {
+            timeSinceSprint = 0;
+            canHeal = false;
             movementSpeed = sprintSpeed;
+            stamina -= Time.deltaTime;
         }
         else
         {
             movementSpeed = walkSpeed;
+            timeSinceSprint += Time.deltaTime;
+        }
+        if(timeSinceSprint >= staminaCooldown)
+        {
+            canHeal = true;
         }
     }
+    private void Animation(Vector3 mD)
+    {
+        if (mD == Vector3.zero)
+        {
+            animator.SetFloat("speed", 0);
+        }
+        else if (movementSpeed == sprintSpeed)
+        {
+            animator.SetFloat("speed", 0.6f);
+        }
+        else if (movementSpeed == walkSpeed)
+        {
+            animator.SetFloat("speed", 0.4f);
+        }
+    }
+    private void RefillStamina()
+    {
+        if(canHeal == true)
+        {
+            if(stamina < staminaMax)
+            {
+                //staminaLevel.fillAmount = Mathf.MoveTowards(staminaLevel.fillAmount, 1f, Time.deltaTime * 0.25f);
+                stamina = Mathf.MoveTowards(stamina / staminaMax, 1f, Time.deltaTime * 0.25f) * staminaMax;
+            }
+        }
+    }
+
 }
