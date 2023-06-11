@@ -2,19 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-using static UnityEngine.GraphicsBuffer;
 using UnityEngine.AI;
 
 public class RedBotMovement : NetworkBehaviour
 {
-
     [SerializeField] private GameObject ball;
-
     private NavMeshAgent AI_Agent;
-
-
-    public bool isBot = true;
-
+    [SyncVar] public bool isBot = true;
     private Animator animator;
 
     void Start()
@@ -24,12 +18,18 @@ public class RedBotMovement : NetworkBehaviour
         ball = GameObject.FindGameObjectWithTag("Ball");
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (gameObject.GetComponent<CatchBall>().isCatched)
         {
             isBot = false;
+        }
+        else if (gameObject.GetComponent<CatchBall>().activePlayer != null && gameObject.GetComponent<CatchBall>().activePlayer.tag == "RedPlayer")
+        {
+            if (gameObject.GetComponent<CatchBall>().isCatched == false)
+            {
+                isBot = true;
+            }
         }
 
         if (isBot)
@@ -41,7 +41,7 @@ public class RedBotMovement : NetworkBehaviour
         else
         {
             GetComponent<PlayerMovement>().enabled = true;
-            GetComponent<RedBotMovement>().enabled = false; 
+            GetComponent<RedBotMovement>().enabled = false;
         }
     }
 }

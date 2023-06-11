@@ -11,6 +11,7 @@ TagManager:
   - BlueGatesTrigger
   - RedPlayer
   - BluePlayer
+  - GameManager
   layers:
   - Default
   - TransparentFX

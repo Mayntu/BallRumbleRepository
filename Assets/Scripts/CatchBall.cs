@@ -12,10 +12,13 @@ public class CatchBall : NetworkBehaviour
     [SyncVar(hook = nameof(OnIsCatchedChanged))] public bool isCatched = false;
 	
 	public GameObject activePlayer;
+    private Animator animator;
+
 
     private void Start()
     {
         ball = GameObject.FindGameObjectWithTag("Ball");
+        animator= GetComponent<Animator>();
     }
 
     private void Update()
@@ -89,6 +92,21 @@ public class CatchBall : NetworkBehaviour
         if (isLocalPlayer)
         {
             ball.transform.position = Vector3.zero;
+        }
+    }
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "BluePlayer" && gameObject.tag == "RedPlayer")
+        {
+            animator.Play("Knocked");
+            isCatched = false;
+            ball.GetComponent<Rigidbody>().AddForce(new Vector3(0f, 5f, 0f), ForceMode.Force);
+        }
+        if (col.gameObject.tag == "RedPlayer" && gameObject.tag == "BluePlayer")
+        {
+            animator.Play("Knocked");
+            isCatched = false;
+            ball.GetComponent<Rigidbody>().AddForce(new Vector3(0f, 5f, 0f), ForceMode.Force);
         }
     }
 }

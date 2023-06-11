@@ -101,7 +101,6 @@ GameObject:
   - component: {fileID: 3804196645126716504}
   - component: {fileID: 2702847416947461068}
   - component: {fileID: 734300341547900708}
-  - component: {fileID: 3543722674945225708}
   - component: {fileID: 1064833866542256060}
   - component: {fileID: 4388026629892707665}
   - component: {fileID: -5275354069992217588}
@@ -185,6 +184,7 @@ MonoBehaviour:
   redScore: 0
   blueScore: 0
   ball: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!143 &2832098811219935728
 CharacterController:
   m_ObjectHideFlags: 0
@@ -283,23 +283,6 @@ MonoBehaviour:
   syncAngularVelocity: 1
   clearAngularVelocity: 0
   angularVelocitySensitivity: 0.1
---- !u!114 &3543722674945225708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2918110095531199675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6697440ebfaf2cb4185e6714f9505aa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  ball: {fileID: 0}
-  handsPosition: {fileID: 4244598078620872311}
 --- !u!95 &1064833866542256060
 Animator:
   serializedVersion: 5

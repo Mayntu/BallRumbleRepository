@@ -6,16 +6,7 @@ using Mirror;
 
 public class PlayerMovement : NetworkBehaviour
 {
-    public int RedScore
-    {
-        get { return redScore; }
-        set { redScore = value; }
-    }
-    public int BlueScore
-    {
-        get { return blueScore; }
-        set { blueScore = value; }
-    }
+
 
     [SerializeField] private float movementSpeed;
     [SerializeField] private float rotationSpeed;
@@ -29,6 +20,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private int blueScore;
     
     [SerializeField] private GameObject ball;
+    [SerializeField] private GameObject gameManager;
 
     //[SerializeField] private Image staminaLevel;
     private bool canHeal;
@@ -49,6 +41,7 @@ public class PlayerMovement : NetworkBehaviour
 
         originalStepOffset = characterController.stepOffset;
         ball = GameObject.FindGameObjectWithTag("Ball");
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
     }
 
     private void Update()
@@ -157,7 +150,7 @@ public class PlayerMovement : NetworkBehaviour
         {
             if(canAdd)
             {
-                blueScore += 5;
+                gameManager.GetComponent<GoalSystem>().BlueScore += 5;
                 canAdd = false;
                 StartCoroutine(DoAddPoints());
             }
@@ -166,7 +159,7 @@ public class PlayerMovement : NetworkBehaviour
         {
             if(canAdd)
             {
-                redScore += 5;
+                gameManager.GetComponent<GoalSystem>().RedScore += 5;
                 canAdd = false;
                 StartCoroutine(DoAddPoints());
             }
@@ -177,6 +170,7 @@ public class PlayerMovement : NetworkBehaviour
         yield return new WaitForSeconds(2f);
         canAdd = true;
     }
+
 
 
 }
