@@ -1,21 +1,37 @@
 using UnityEngine;
 using Mirror;
+using System.Collections;
 
 public class PlayerThrowBall : NetworkBehaviour
 {
+    public GameObject Player
+    {
+        get { return player; }
+        set { player = value; }
+    }
+    
+
+
     [SerializeField] private float maxPower;
     [SerializeField] private float maxDistance;
     [SerializeField] private float throwAngle;
     [SerializeField] private GameObject player;
 
     private bool isThrowing = false;
+
     private float currentPower = 0f;
     private float currentDistance = 0f;
 
+    private int redScore;
+    private int blueScore;
 
+
+    
     
     private void Update()
     {
+        if (!isServer) return;
+        
         if (Input.GetMouseButtonDown(0))
         {
             isThrowing = true;
@@ -45,5 +61,6 @@ public class PlayerThrowBall : NetworkBehaviour
     public void AssignPlayer(GameObject player_)
     {
         player = player_;
+
     }
 }

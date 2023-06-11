@@ -103,9 +103,10 @@ GameObject:
   - component: {fileID: 734300341547900708}
   - component: {fileID: 3543722674945225708}
   - component: {fileID: 1064833866542256060}
+  - component: {fileID: 4388026629892707665}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Player
+  m_Name: RedPlayer
+  m_TagString: RedPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,6 +179,9 @@ MonoBehaviour:
   staminaMax: 5
   stamina: 5
   staminaCooldown: 3
+  redScore: 0
+  blueScore: 0
+  ball: {fileID: 0}
 --- !u!143 &2832098811219935728
 CharacterController:
   m_ObjectHideFlags: 0
@@ -265,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83392ae5c1b731446909f252fd494ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
+  syncDirection: 1
   syncMode: 0
   syncInterval: 0
   target: {fileID: 8618099285507868989}
@@ -314,6 +318,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4388026629892707665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2918110095531199675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 1
+  animator: {fileID: 1064833866542256060}
 --- !u!1001 &2343320091241210932
 PrefabInstance:
   m_ObjectHideFlags: 0

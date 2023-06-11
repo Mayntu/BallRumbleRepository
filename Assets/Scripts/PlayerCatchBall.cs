@@ -27,7 +27,11 @@ public class PlayerCatchBall : NetworkBehaviour
     }
     private void OnTriggerEnter(Collider collider)
     {
-        if(collider.CompareTag("Ball"))
+        if (!isServer)
+            return;
+        
+        NetworkIdentity networkIdentity = collider.GetComponent<NetworkIdentity>();
+        if(networkIdentity != null && collider.CompareTag("Ball"))
         {
             isCatched = true;
             ball.GetComponent<PlayerThrowBall>().AssignPlayer(gameObject);
@@ -35,7 +39,12 @@ public class PlayerCatchBall : NetworkBehaviour
     }
     private void OnTriggerExit(Collider collider)
     {
-        if(collider.CompareTag("Ball"))
+        if (!isServer)
+            return;
+
+
+        NetworkIdentity networkIdentity = collider.GetComponent<NetworkIdentity>();
+        if(networkIdentity != null && collider.CompareTag("Ball"))
         {
             isCatched = false;
             ball.GetComponent<PlayerThrowBall>().AssignPlayer(null);
@@ -43,6 +52,8 @@ public class PlayerCatchBall : NetworkBehaviour
     }
     private void CatchBall()
     {
+        if (!isServer)
+            return;
         if(isCatched)
         {
             ball.transform.position = handsPosition.position;

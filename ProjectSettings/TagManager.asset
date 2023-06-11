@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ball
+  - RedTrigger
+  - BlueTrigger
+  - RedGatesTrigger
+  - BlueGatesTrigger
+  - RedPlayer
   layers:
   - Default
   - TransparentFX

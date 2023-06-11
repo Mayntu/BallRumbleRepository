@@ -6,6 +6,17 @@ using Mirror;
 
 public class PlayerMovement : NetworkBehaviour
 {
+    public int RedScore
+    {
+        get { return redScore; }
+        set { redScore = value; }
+    }
+    public int BlueScore
+    {
+        get { return blueScore; }
+        set { blueScore = value; }
+    }
+
     [SerializeField] private float movementSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float jumpSpeed;
@@ -14,6 +25,10 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float staminaMax;
     [SerializeField] private float stamina;
     [SerializeField] private float staminaCooldown;
+    [SerializeField] private int redScore;
+    [SerializeField] private int blueScore;
+    
+    [SerializeField] private GameObject ball;
 
     //[SerializeField] private Image staminaLevel;
 
@@ -27,12 +42,15 @@ public class PlayerMovement : NetworkBehaviour
     private CharacterController characterController;
     private Animator animator;
 
+    private bool canAdd = true;
+
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
         animator= GetComponent<Animator>();
 
         originalStepOffset = characterController.stepOffset;
+        ball = GameObject.FindGameObjectWithTag("Ball");
     }
 
     private void Update()
@@ -134,5 +152,30 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("RedTrigger") && ball.GetComponent<PlayerThrowBall>().Player == gameObject && gameObject.tag == "BluePlayer")
+        {
+            if(canAdd)
+            {
+                blueScore += 5;
+                canAdd = false;
+                StartCoroutine(DoAddPoints());
+            }
+        }
+        else if(other.CompareTag("BlueTrigger") && ball.GetComponent<PlayerThrowBall>().Player == gameObject && gameObject.tag == "RedPlayer")
+        {
+            if(canAdd)
+            {
+                redScore += 5;
+                canAdd = false;
+                StartCoroutine(DoAddPoints());
+            }
+        }
+    }
+    IEnumerator DoAddPoints()
+    {
+        yield return new WaitForSeconds(2f);
+        canAdd = true;
+    }
 }
