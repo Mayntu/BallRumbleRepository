@@ -171,6 +171,10 @@ public class PlayerMovement : NetworkBehaviour
                 StartCoroutine(DoAddPoints());
             }
         }
+		if(ball.other.CompareTag("aa"))
+		{
+			
+		}
     }
     IEnumerator DoAddPoints()
     {
