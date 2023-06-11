@@ -10,24 +10,17 @@ public class PlayerThrowBall : NetworkBehaviour
         set { player = value; }
     }
     
-
-
     [SerializeField] private float maxPower;
     [SerializeField] private float maxDistance;
     [SerializeField] private float throwAngle;
     [SerializeField] private GameObject player;
 
     private bool isThrowing = false;
+    private bool canThrow = true;
 
     private float currentPower = 0f;
     private float currentDistance = 0f;
 
-    private int redScore;
-    private int blueScore;
-
-
-    
-    
     private void Update()
     {
         if (!isServer) return;
@@ -49,18 +42,26 @@ public class PlayerThrowBall : NetworkBehaviour
             transform.rotation = throwRotation * Quaternion.Euler(throwAngle, 0f, 0f);
         }
 
-        if (Input.GetMouseButtonUp(0) && isThrowing && player != null)
+        if (Input.GetMouseButtonUp(0) && isThrowing && canThrow && player != null)
         {
             isThrowing = false;
+            canThrow = false; // Устанавливаем флаг canThrow в false
             Vector3 throwDirection = transform.forward;
             Vector3 throwForce = throwDirection * currentPower;
             GetComponent<Rigidbody>().AddForce(throwForce, ForceMode.Impulse);
-            player.GetComponent<PlayerCatchBall>().IsCatched = false;
+
+            StartCoroutine(EnableThrowing()); // Запускаем корутину для включения возможности броска через некоторое время
         }
     }
+
+    private IEnumerator EnableThrowing()
+    {
+        yield return new WaitForSeconds(1f); // Подождать 1 секунду
+        canThrow = true; // Включить возможность броска
+    }
+
     public void AssignPlayer(GameObject player_)
     {
         player = player_;
-
     }
 }

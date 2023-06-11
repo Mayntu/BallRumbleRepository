@@ -208,7 +208,7 @@ MonoBehaviour:
   networkAddress: localhost
   maxConnections: 100
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 2918110095531199675, guid: 5b4de1bb8cce360418d2c70c356b7473, type: 3}
+  playerPrefab: {fileID: 581615408460838149, guid: 5b4de1bb8cce360418d2c70c356b7473, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
@@ -1423,7 +1423,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   target: {fileID: 1161707497}
-  clientAuthority: 0
+  clientAuthority: 1
   syncVelocity: 1
   clearVelocity: 0
   velocitySensitivity: 0.1
@@ -1446,7 +1446,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   target: {fileID: 1161707496}
-  clientAuthority: 0
+  clientAuthority: 1
   syncPosition: 1
   syncRotation: 1
   syncScale: 0
