@@ -126,7 +126,7 @@ Transform:
   - {fileID: 4244598078620872311}
   - {fileID: 2814640126788535263}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8618099285507868989
 Rigidbody:
@@ -175,8 +175,8 @@ MonoBehaviour:
   jumpSpeed: 10
   sprintSpeed: 10
   walkSpeed: 7
-  staminaMax: 3
-  stamina: 3
+  staminaMax: 5
+  stamina: 5
   staminaCooldown: 3
 --- !u!143 &2832098811219935728
 CharacterController:
