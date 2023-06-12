@@ -1,30 +1,51 @@
-using UnityEngine;
 using Mirror;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class StartGame : MonoBehaviour
+public class StartGame : NetworkBehaviour
 {
-    public NetworkManager networkManager;
-    public string serverAddress = "localhost";
     public GameObject bluePlayerPrefab;
-    public GameObject redPlayerPrefab;
+    public GameObject spawnRedPlayer;
 
-    public void ConnectAndCreateBluePlayer()
+    public NetworkManager networkManager;
+
+    public void ConnectAsBluePlayer()
     {
-        networkManager.networkAddress = serverAddress;
+        networkManager.playerPrefab = bluePlayerPrefab;
         networkManager.StartClient();
-
-        // Создаем и спауним синего игрока
-        GameObject bluePlayer = Instantiate(bluePlayerPrefab);
-        NetworkServer.Spawn(bluePlayer);
+        Debug.Log("1");
     }
 
-    public void ConnectAndCreateRedPlayer()
-    {
-        networkManager.networkAddress = serverAddress;
-        networkManager.StartClient();
+    // public void ConnectAsRedPlayer()
+    // {
+    //     SceneManager.sceneLoaded += OnSceneLoaded;
+    //     SceneManager.LoadScene("SampleScene1");
+    //     Debug.Log("1");
+    // }
 
-        // Создаем и спауним красного игрока
-        GameObject redPlayer = Instantiate(redPlayerPrefab);
-        NetworkServer.Spawn(redPlayer);
+    // private void OnDestroy()
+    // {
+    //     SceneManager.sceneLoaded -= OnSceneLoaded;
+    // }
+
+    // private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    // {
+    //     if (scene.name == "SampleScene1")
+    //     {
+    //         NetworkServer.Listen(7777); // Указываем порт, который будет прослушивать сервер
+    //         Debug.Log("2"); 
+    //         CmdSpawnRedPlayer();
+    //     }
+    // }
+
+    // [Command]
+    // private void CmdSpawnRedPlayer()
+    // {
+    //     GameObject redPlayer = Instantiate(redPlayerPrefab, Vector3.zero, Quaternion.identity);
+    //     NetworkServer.Spawn(redPlayer);
+    // }
+    public void ConnectAsRedPlayer()
+    {
+        spawnRedPlayer.SetActive(true);
     }
 }

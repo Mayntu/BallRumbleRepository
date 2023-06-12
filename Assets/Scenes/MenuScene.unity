@@ -207,8 +207,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1124067560}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: ConnectAndCreateRedPlayer
+        m_TargetAssemblyTypeName: StartGame, Assembly-CSharp
+        m_MethodName: ConnectAsRedPlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -670,10 +670,11 @@ MonoBehaviour:
   networkAddress: localhost
   maxConnections: 3
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 0}
+  playerPrefab: {fileID: 2918110095531199675, guid: d54f432bb4ec986479e2ac8af7c0db38, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 2918110095531199675, guid: b669ec18fc5b4e14986b37e8a00bd682, type: 3}
   snapshotSettings:
     bufferTimeMultiplier: 2
     catchupNegativeThreshold: -1
@@ -730,10 +731,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e91e8c74909b67469d2a011c7da6669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkManager: {fileID: 887378644}
-  serverAddress: localhost
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   bluePlayerPrefab: {fileID: 2918110095531199675, guid: d54f432bb4ec986479e2ac8af7c0db38, type: 3}
-  redPlayerPrefab: {fileID: 2918110095531199675, guid: b669ec18fc5b4e14986b37e8a00bd682, type: 3}
+  spawnRedPlayer: {fileID: 0}
+  networkManager: {fileID: 887378644}
 --- !u!114 &1124067561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,8 +853,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1124067560}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: ConnectAndCreateBluePlayer
+        m_TargetAssemblyTypeName: StartGame, Assembly-CSharp
+        m_MethodName: ConnectAsBluePlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
