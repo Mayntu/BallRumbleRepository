@@ -12,6 +12,7 @@ TagManager:
   - RedPlayer
   - BluePlayer
   - GameManager
+  - SpawnRedPlayer
   layers:
   - Default
   - TransparentFX

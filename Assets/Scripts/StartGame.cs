@@ -9,6 +9,7 @@ public class StartGame : NetworkBehaviour
 
     public NetworkManager networkManager;
 
+    
     public void ConnectAsBluePlayer()
     {
         networkManager.playerPrefab = bluePlayerPrefab;
@@ -46,6 +47,7 @@ public class StartGame : NetworkBehaviour
     // }
     public void ConnectAsRedPlayer()
     {
+        spawnRedPlayer = GameObject.FindWithTag("SpawnRedPlayer");
         spawnRedPlayer.SetActive(true);
     }
 }
