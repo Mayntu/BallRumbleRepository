@@ -7,6 +7,8 @@ public class StartGame : NetworkBehaviour
     public GameObject bluePlayerPrefab;
     public GameObject spawnRedPlayer;
 
+    public bool isRedPlayer = false;
+
     public NetworkManager networkManager;
 
     
@@ -14,7 +16,6 @@ public class StartGame : NetworkBehaviour
     {
         networkManager.playerPrefab = bluePlayerPrefab;
         networkManager.StartClient();
-        Debug.Log("1");
     }
 
     // public void ConnectAsRedPlayer()
@@ -45,9 +46,15 @@ public class StartGame : NetworkBehaviour
     //     GameObject redPlayer = Instantiate(redPlayerPrefab, Vector3.zero, Quaternion.identity);
     //     NetworkServer.Spawn(redPlayer);
     // }
+
+
     public void ConnectAsRedPlayer()
     {
-        spawnRedPlayer = GameObject.FindWithTag("SpawnRedPlayer");
-        spawnRedPlayer.SetActive(true);
+        Debug.Log("aaaaaaaa");
+        isRedPlayer = true;
+
+        int isRed = isRedPlayer ? 1 : 0;
+        PlayerPrefs.SetInt("SpawnRedPlayer", isRed);
+
     }
 }
